@@ -27,16 +27,6 @@ nepdate
 
 This will display both the current English date and the corresponding Nepali date with Nepali numerals.
 
-### Python Code
-You can also use it in your Python code:
-
-```python
-from nepali_date_cli import get_nepali_date
-
-# Get today's date
-nepali_date = get_nepali_date()
-print(nepali_date)
-```
 
 ## Example Output
 
