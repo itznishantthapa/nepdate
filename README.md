@@ -48,6 +48,4 @@ English Date: Friday 2024-03-21
 - Python 3.13
 - nepali-datetime package (automatically installed)
 
-## License
 
-This project is licensed under the MIT License. 
