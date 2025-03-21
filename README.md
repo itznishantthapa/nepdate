@@ -45,7 +45,7 @@ English Date: Friday 2024-03-21
 
 ## Requirements
 
-- Python 3.6 or higher
+- Python 3.13
 - nepali-datetime package (automatically installed)
 
 ## License
