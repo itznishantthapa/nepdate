@@ -24,12 +24,28 @@ wheels/
 venv/
 env/
 ENV/
+test_env/
+test_miti/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PyPI credentials
+.pypirc
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
 
 # OS
 .DS_Store
