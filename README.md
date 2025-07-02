@@ -10,27 +10,30 @@ A simple command-line tool to display Nepali dates with beautiful boxed output a
 
 ### 🍎 macOS Installation
 
-#### Option 1: Using Homebrew (Recommended)
-If you have [Homebrew](https://brew.sh/) installed:
+#### Option 1: Using pipx (For Homebrew-managed Python)
+If you have Python installed via [Homebrew](https://brew.sh/) and get "externally-managed-environment" errors, use pipx:
 
 ```bash
-# Install Python if not already installed
-brew install python
+# Install pipx if you don't have it
+brew install pipx
 
 # Install the package
-pip3 install nepali-date-cli
+pipx install nepali-date-cli
 ```
 
-#### Option 2: Using System Python
+#### Option 2: Using pip3 (Standard Installation)
+For most macOS systems, try this first:
+
 ```bash
-# Install using pip3 (recommended for macOS)
+# Install using pip3
 pip3 install nepali-date-cli
 
 # If you encounter permission issues, use --user flag
 pip3 install --user nepali-date-cli
 ```
 
-#### Option 3: Using Virtual Environment (Best Practice)
+#### Option 3: Using Virtual Environment (Recommended)
+This is the safest method that avoids system conflicts:
 ```bash
 # Create a virtual environment
 python3 -m venv nepali-date-env
@@ -41,8 +44,28 @@ source nepali-date-env/bin/activate
 # Install the package
 pip install nepali-date-cli
 
+# The 'miti' command is now available in this environment
+miti
+
 # To deactivate later (optional)
 deactivate
+```
+
+#### Option 4: Using Homebrew Python (Alternative)
+```bash
+# Install Python via Homebrew if not already done
+brew install python
+
+# Try installing directly
+pip3 install nepali-date-cli
+```
+
+#### Option 5: Override System Protection (Last Resort)
+Only use this if other methods don't work:
+
+```bash
+# This bypasses the safety check - use with caution
+pip3 install --break-system-packages nepali-date-cli
 ```
 
 ### 🪟 Windows Installation
@@ -81,7 +104,18 @@ deactivate
 
 #### macOS:
 ```bash
+# If using pipx (for Homebrew-managed Python)
+pipx upgrade nepali-date-cli
+
+# If using pip3 (standard installation)
 pip3 install --upgrade nepali-date-cli
+
+# If using virtual environment
+source nepali-date-env/bin/activate
+pip install --upgrade nepali-date-cli
+
+# If using system install with override (last resort)
+pip3 install --upgrade --break-system-packages nepali-date-cli
 ```
 
 #### Windows:
@@ -93,9 +127,35 @@ pip install --upgrade nepali-date-cli
 
 #### Common Issues and Solutions:
 
-**macOS:**
+**macOS - "externally-managed-environment" Error:**
+```
+error: externally-managed-environment
+× This environment is externally managed
+```
+
+This error occurs when Python is managed by Homebrew. **Solutions (in order of preference):**
+
+1. **Use pipx (Specifically for Homebrew-managed Python):**
+   ```bash
+   brew install pipx
+   pipx install nepali-date-cli
+   ```
+
+2. **Use Virtual Environment:**
+   ```bash
+   python3 -m venv nepali-date-env
+   source nepali-date-env/bin/activate
+   pip install nepali-date-cli
+   ```
+
+3. **Force install (Not recommended):**
+   ```bash
+   pip3 install --break-system-packages nepali-date-cli
+   ```
+
+**Other macOS Issues:**
 - If you get "command not found: pip3", install Python via Homebrew: `brew install python`
-- If permission denied, use: `pip3 install --user nepali-date-cli`
+- Try `pip3 install nepali-date-cli` first - it works on many systems
 - For M1/M2 Macs, ensure you're using the correct Python architecture
 
 **Windows:**
@@ -103,27 +163,73 @@ pip install --upgrade nepali-date-cli
 - If you get permission errors, run Command Prompt as Administrator
 - Ensure Python and pip are properly installed from [python.org](https://python.org)
 
+**Windows - 'miti' command not found after installation:**
+If you see warnings during installation or the `miti` command doesn't work even after successful installation, this indicates Python is not correctly configured in your system environment variables.
+
+**Solutions:**
+
+1. **Reinstall Python from Official Source (Recommended):**
+   - Download Python from the official website: [python.org](https://python.org/downloads/)
+   - During installation, **CHECK** "Add Python to PATH" option
+   - Restart your Command Prompt/PowerShell after installation
+   - Verify installation: `python --version` and `pip --version`
+
+2. **Manually Add Python to PATH:**
+   ```cmd
+   # Find Python installation path (usually):
+   # C:\Users\YourUsername\AppData\Local\Programs\Python\Python3x\
+   # C:\Users\YourUsername\AppData\Local\Programs\Python\Python3x\Scripts\
+   
+   # Add both paths to your system PATH environment variable
+   ```
+
+3. **Use Full Python Path:**
+   ```cmd
+   # If PATH is not configured, use full path
+   C:\Users\YourUsername\AppData\Local\Programs\Python\Python3x\Scripts\miti.exe
+   ```
+
+4. **Verify Installation Paths:**
+   ```cmd
+   # Check where pip installed the package
+   pip show nepali-date-cli
+   
+   # Check Scripts directory
+   where miti
+   ```
+
+**Windows Installation Warnings:**
+- If you see warnings about "Scripts directory not in PATH"
+- Or "Consider adding this directory to PATH"
+- This confirms Python environment variables need configuration
+
 **Both Platforms:**
 - If the `miti` command is not found after installation, restart your terminal
 - Use virtual environments to avoid conflicts with system packages
+- For Windows: If `miti` still doesn't work after restart, check Python PATH configuration
+- Verify successful installation with: `pip show nepali-date-cli`
 
 ## 🚀 Usage
 
 ### Command Line Interface
-After installation, you can use the `miti` command in your terminal:
+After installation, you can use the `miti` command:
 
-#### macOS/Linux:
+#### If using pipx or system install:
 ```bash
 miti
 ```
 
-#### Windows (Command Prompt):
-```cmd
+#### If using virtual environment:
+```bash
+# First activate the environment
+source nepali-date-env/bin/activate
+
+# Then run the command
 miti
 ```
 
-#### Windows (PowerShell):
-```powershell
+#### Windows:
+```cmd
 miti
 ```
 
@@ -134,8 +240,22 @@ This will display both the current English date and the corresponding Nepali dat
 ### Verifying Installation
 To verify that the installation was successful, run:
 
+**All Platforms:**
 ```bash
 miti --help    # Should show help information
+pip show nepali-date-cli    # Shows package details
+```
+
+**Windows - Additional Verification:**
+```cmd
+# Check if miti is in PATH
+where miti
+
+# If not found, check Python Scripts directory
+dir C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python3*\Scripts\miti*
+
+# Alternative way to run if PATH issues
+python -c "import nepali_date_cli; print('Package installed successfully')"
 ```
 
 ## 📸 Example Output
