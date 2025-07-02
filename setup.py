@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="nepali-date-cli",
-    version="0.1.7",
+    version="0.1.8",
     packages=find_packages(),
     install_requires=[
         "nepali-datetime",
@@ -19,10 +19,13 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/itznishantthapa/nepdate",
+    license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Topic :: Utilities",
+        "Environment :: Console",
     ],
     python_requires=">=3.6",
+    keywords="nepali date cli terminal miti",
 ) 

@@ -26,6 +26,8 @@ env/
 ENV/
 test_env/
 test_miti/
+test_build_env/
+*_env/
 
 # IDE
 .idea/

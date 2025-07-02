@@ -84,12 +84,61 @@ def print_boxed_dates(nepali_day, nepali_date_str, nepali_month_name, nepali_day
 
 def deprecated_main():
     """Deprecated main function that shows a warning and calls the main function"""
+    # Check if any arguments were passed (excluding the script name)
+    if len(sys.argv) > 1:
+        print("Usage: nepdate")
+        print("Shows today's date in Nepali and English formats.")
+        print()
+        print("Warning: 'nepdate' command is deprecated and will be removed in a future version.")
+        print("Please use 'miti' instead for the same functionality.")
+        sys.exit(1)
+    
     print("    Warning: 'nepdate' command is deprecated and will be removed in a future version.")
     print("   Please use 'miti' instead for the same functionality.")
     print()
-    main()
+    _display_date()
 
 def main():
+    try:
+        # Check if any arguments were passed (excluding the script name)
+        if len(sys.argv) > 1:
+            print("Usage: miti")
+            print("Shows today's date in Nepali and English formats.")
+            sys.exit(1)
+        
+        # Get current date
+        current_date = datetime.now()
+        
+        # Convert to Nepali date
+        nepali_current = nepali_date.from_datetime_date(current_date.date())
+        
+        # Get day names
+        nepali_day = get_nepali_day_name(nepali_current.weekday())
+        english_day = current_date.strftime("%A")
+        
+        # Get month names
+        nepali_month_name = get_nepali_month_name(nepali_current.month)
+        english_month_name = get_english_month_name(current_date.month)
+        
+        # Format Nepali date with Nepali numerals
+        nepali_year = to_nepali_numerals(nepali_current.year)
+        nepali_month = to_nepali_numerals(nepali_current.month)
+        nepali_day_num = to_nepali_numerals(nepali_current.day)
+        nepali_date_str = f"{nepali_year}-{nepali_month}-{nepali_day_num}"
+        
+        # Format English date
+        english_date_str = current_date.strftime("%Y-%m-%d")
+        english_day_num = current_date.day
+        
+        # Print in boxed format
+        print_boxed_dates(nepali_day, nepali_date_str, nepali_month_name, nepali_day_num, english_day, english_date_str, english_month_name, english_day_num)
+        
+    except Exception as e:
+        print(f"Error: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+
+def _display_date():
+    """Internal function to display the date without argument checking"""
     try:
         # Get current date
         current_date = datetime.now()
